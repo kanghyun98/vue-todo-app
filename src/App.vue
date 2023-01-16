@@ -1,0 +1,89 @@
+<template>
+  <HeaderWrapper />
+  <MainWrapper
+    :todoList="todoList"
+    @addTodoItem="addTodoItem"
+    @toggleTodoItem="toggleTodoItem"
+    @removeTodoItem="removeTodoItem"
+    @resetTodoList="resetTodoList"
+  />
+</template>
+
+<script lang="ts">
+import HeaderWrapper from "./components/HeaderWrapper.vue";
+import MainWrapper from "./components/MainWrapper.vue";
+import type { TodoItemType } from "./components/TodoList.vue";
+import { saveData, callData } from "@/utils/storage";
+
+const TODO_STORAGE_KEY = "vue-todo-list";
+
+export default {
+  components: {
+    HeaderWrapper: HeaderWrapper,
+    MainWrapper: MainWrapper,
+  },
+  data() {
+    return {
+      todoList: [] as TodoItemType[],
+    };
+  },
+  created() {
+    const storageData = callData(TODO_STORAGE_KEY);
+    if (storageData) {
+      this.todoList = storageData;
+    }
+  },
+  methods: {
+    addTodoItem(todo: string) {
+      if (todo) {
+        const newTodoData = {
+          id: this.todoList[this.todoList.length - 1]?.id + 1 || 1, // 마지막 요소의 id값 + 1
+          completed: false,
+          todo,
+        };
+        this.todoList.push(newTodoData);
+
+        // LocalStoareg 업데이트
+        saveData(this.todoList, TODO_STORAGE_KEY);
+      }
+    },
+    toggleTodoItem(targetId: number) {
+      this.todoList.forEach((todoItem) => {
+        if (todoItem.id === targetId) {
+          todoItem.completed = !todoItem.completed;
+        }
+      });
+
+      // LocalStoareg 업데이트
+      saveData(this.todoList, TODO_STORAGE_KEY);
+    },
+    removeTodoItem(targetId: number) {
+      this.todoList = this.todoList.filter(
+        (todoItem) => todoItem.id !== targetId
+      );
+
+      // LocalStoareg 업데이트
+      saveData(this.todoList, TODO_STORAGE_KEY);
+    },
+    resetTodoList() {
+      this.todoList = [];
+
+      // LocalStoareg 업데이트
+      saveData(this.todoList, TODO_STORAGE_KEY);
+    },
+  },
+};
+</script>
+
+<style>
+body {
+  margin: 0;
+}
+
+#app {
+  position: relative;
+  height: 100vh;
+  text-align: center;
+  background-color: #242424;
+}
+</style>
