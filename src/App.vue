@@ -53,12 +53,14 @@ export default {
     toggleTodoItem(targetId: number) {
       this.todoList.forEach((todoItem) => {
         if (todoItem.id === targetId) {
-          if (!todoItem.completed) {
+          todoItem.completed = !todoItem.completed; // toggle
+
+          // animation
+          if (todoItem.completed) {
             jsConfetti.addConfetti({
               emojis: ["🌈", "⚡️", "💥", "✨", "💫", "🌸"],
             });
           }
-          todoItem.completed = !todoItem.completed;
         }
       });
 
