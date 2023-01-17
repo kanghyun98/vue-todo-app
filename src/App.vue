@@ -82,7 +82,8 @@ body {
 
 #app {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
+  padding-bottom: 50px;
   text-align: center;
   background-color: #242424;
 }
