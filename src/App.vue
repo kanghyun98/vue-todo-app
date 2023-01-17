@@ -46,7 +46,7 @@ export default {
         };
         this.todoList.push(newTodoData);
 
-        // LocalStoareg 업데이트
+        // LocalStorage 업데이트
         saveData(this.todoList, TODO_STORAGE_KEY);
       }
     },
@@ -64,7 +64,7 @@ export default {
         }
       });
 
-      // LocalStoareg 업데이트
+      // LocalStorage 업데이트
       saveData(this.todoList, TODO_STORAGE_KEY);
     },
     removeTodoItem(targetId: number) {
@@ -72,13 +72,13 @@ export default {
         (todoItem) => todoItem.id !== targetId
       );
 
-      // LocalStoareg 업데이트
+      // LocalStorage 업데이트
       saveData(this.todoList, TODO_STORAGE_KEY);
     },
     resetTodoList() {
       this.todoList = [];
 
-      // LocalStoareg 업데이트
+      // LocalStorage 업데이트
       saveData(this.todoList, TODO_STORAGE_KEY);
     },
   },
