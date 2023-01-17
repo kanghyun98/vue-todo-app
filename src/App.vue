@@ -14,7 +14,7 @@ import JSConfetti from "js-confetti";
 import HeaderWrapper from "./components/HeaderWrapper.vue";
 import MainWrapper from "./components/MainWrapper.vue";
 import type { TodoItemType } from "./components/TodoList.vue";
-import { saveData, callData } from "@/utils/storage";
+import { saveData, getData } from "./utils/storage";
 
 const TODO_STORAGE_KEY = "vue-todo-list";
 
@@ -31,7 +31,7 @@ export default {
     };
   },
   created() {
-    const storageData = callData(TODO_STORAGE_KEY);
+    const storageData = getData(TODO_STORAGE_KEY);
     if (storageData) {
       this.todoList = storageData;
     }
