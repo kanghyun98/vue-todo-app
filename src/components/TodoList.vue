@@ -13,12 +13,6 @@
 <script lang="ts">
 import TodoItem from "./TodoItem.vue";
 
-export interface TodoItemType {
-  id: number;
-  todo: string;
-  completed: boolean;
-}
-
 export default {
   components: {
     TodoItem: TodoItem,

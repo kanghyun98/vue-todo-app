@@ -16,8 +16,18 @@
 </template>
 
 <script lang="ts">
+import type { PropType } from "vue";
+
+export interface TodoItemType {
+  id: number;
+  todo: string;
+  completed: boolean;
+}
+
 export default {
-  props: ["todoItem"],
+  props: {
+    todoItem: { type: Object as PropType<TodoItemType>, required: true },
+  },
   methods: {
     toggleTodoItem(targetId: number) {
       this.$emit("toggleTodoItem", targetId);

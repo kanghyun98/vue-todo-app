@@ -13,7 +13,7 @@
 import JSConfetti from "js-confetti";
 import HeaderWrapper from "./components/HeaderWrapper.vue";
 import MainWrapper from "./components/MainWrapper.vue";
-import type { TodoItemType } from "./components/TodoList.vue";
+import type { TodoItemType } from "./components/TodoItem.vue";
 import { saveData, getData } from "./utils/storage";
 
 const TODO_STORAGE_KEY = "vue-todo-list";
